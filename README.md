@@ -3,7 +3,9 @@ Overlay clean-url module for CMS-less, php based websites
 
 ## What it does
 Rewrites the URLs of your website to clean urls:
+
 index.php?l=en&page=mysubject  =>   index/en/mysubject/title-of-my-subject/
+
 my_page.html                   =>   my_page/title-of-my-page/
 
 
@@ -15,15 +17,19 @@ my_page.html                   =>   my_page/title-of-my-page/
 ## Prerequisites
 
 a) All your .html and .php files must be UTF-8 encoded
+
 b) Add "<meta http-equiv="content-type" content="text/html; charset=utf-8">" to header tag of all your HTML pages
+
 c) The cleanurl module will search for the following line to generate the verbose uri from the content:
+
     <meta name="cleanurl" data-details="Text that will be processed to a valid URI"  />
+	
     If this special meta tag is not found, the module will use the content of the header <title> tags as a fallback.
+	
    It is important that you set these values BEFORE you install the clean url module on a public site - otherwise the urls will change,
    which does no good in regard of search engines.
+   
 d) error_reporting should be turned on for debugging only (you may find all error output in error logfile of your website)
-
-
 
 
 
