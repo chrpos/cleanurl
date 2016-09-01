@@ -24,10 +24,10 @@ c) The cleanurl module will search for the following line to generate the verbos
 
     <meta name="cleanurl" data-details="Text that will be processed to a valid URI"  />
 	
-    If this special meta tag is not found, the module will use the content of the header <title> tags as a fallback.
+If this special meta tag is not found, the module will use the content of the header <title> tags as a fallback.
 	
-   It is important that you set these values BEFORE you install the clean url module on a public site - otherwise the urls will change,
-   which does no good in regard of search engines.
+It is important that you set these values BEFORE you install the clean url module on a public site - otherwise the urls will change,
+which does no good in regard of search engines.
    
 d) error_reporting should be turned on for debugging only (you may find all error output in error logfile of your website)
 
@@ -71,5 +71,5 @@ g) Finished.
 # IMPORTANT NOTES
 
 Cache entries do not have a TTL mechanism.
-If once cached associations ever change (e.g. you change the <title> of a document) - truncate the cache file to 0 Bytes length to rebuild the Cache
+If once cached associations ever change (e.g. you change the &lt;title&gt; of a document) - truncate the cache file to 0 Bytes length to rebuild the Cache
 
