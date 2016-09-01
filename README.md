@@ -1,5 +1,5 @@
 # cleanurl
-Overlay clean-url module for CMS-less, php based websites
+Overlay clean-url module for CMS-less, php-based, or static websites
 
 ## What it does
 Rewrites the URLs of your website to clean urls:
@@ -15,11 +15,13 @@ Rewrites the URLs of your website to clean urls:
 
 ## Prerequisites
 
-a) All your .html and .php files must be UTF-8 encoded
+a) All your .html and .php files must be UTF-8 encoded.
 
 b) Add
+
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
-to header tag of all your HTML pages
+
+to all your HTML pages.
 
 c) The cleanurl module will search for the following line to generate the verbose uri from the content:
 
