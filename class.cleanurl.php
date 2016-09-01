@@ -231,7 +231,7 @@ class CleanUrl
 				}
 			} else {
 
-				$this->TriggerError("No cache file found");
+				$this->TriggerError(__FUNCTION__, "No cache file found");
 			}
 		} else {
 
