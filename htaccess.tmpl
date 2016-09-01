@@ -1,0 +1,18 @@
+<IfModule mod_rewrite.c>
+
+# Enable URL rewriting
+RewriteEngine On
+
+# If the file/symlink/dir does not exist - redirect to cleanurl parser
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule .* index_cleanurl.php [L]
+
+# Also, if the file is a .php file - redirect
+RewriteRule ^(.+)\.php$ index_cleanurl.php [L]
+
+# All other files are not processed any further but delivered directly
+
+</IfModule>
+
