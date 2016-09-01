@@ -1,5 +1,5 @@
 # cleanurl
-Overlay clean-url module for CMS-less, php-based, or static websites
+Overlay clean-url module for static websites, or php-based websites without CMS
 
 ## What it does
 Rewrites the URLs of your website to clean urls:
@@ -7,7 +7,11 @@ Rewrites the URLs of your website to clean urls:
     index.php?l=en&page=mysubject  =>   index/en/mysubject/title-of-my-subject/
     my_page.html                   =>   my_page/title-of-my-page/
 
-
+Original urls are 301-redirected to the normalized ones.
+You do not need to modify your existing website.
+Caches the generated urls.
+	
+	
 ## What it does not
 [tbd]
 
@@ -29,11 +33,8 @@ c) The cleanurl module will search for the following line to generate the verbos
 	
 If this special meta tag is not found, the module will use the content of the header &lt;title&gt; tags as a fallback.
 	
-It is important that you set these values BEFORE you install the clean url module on a public site - otherwise the generated urls will change
+You should set these values BEFORE you install the cleanurl module on a public site - otherwise the generated urls will change
 when you update the title.
-   
-d) error_reporting should be turned on for debugging only (you may find all error output in error logfile of your website)
-
 
 
 ## Installation
