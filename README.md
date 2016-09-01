@@ -29,8 +29,8 @@ c) The cleanurl module will search for the following line to generate the verbos
 	
 If this special meta tag is not found, the module will use the content of the header &lt;title&gt; tags as a fallback.
 	
-It is important that you set these values BEFORE you install the clean url module on a public site - otherwise the urls will change,
-which does no good in regard of search engines.
+It is important that you set these values BEFORE you install the clean url module on a public site - otherwise the generated urls will change
+when you update the title.
    
 d) error_reporting should be turned on for debugging only (you may find all error output in error logfile of your website)
 
