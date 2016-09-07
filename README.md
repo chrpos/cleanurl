@@ -1,5 +1,11 @@
 # cleanurl
-Overlay clean-url module for static websites, or php-based websites without CMS
+Clean-url module for static or php-based websites without CMS.
+Rewrites urls, turns
+www.example.org/index.php?l=en&page=mysubject
+into a speaking url like
+www.example.org/index/en/mysubject/title-of-my-subject/
+without modifying an existing website.
+Transparently modifies all internal links of a processed page into their speaking url alternatives.
 
 ## What it does
 Rewrites the URLs of your website to clean urls:
@@ -9,6 +15,7 @@ Rewrites the URLs of your website to clean urls:
 
 Original urls are 301-redirected to the normalized ones.
 You do not need to modify your existing website.
+Automatically adds the &lt;link rel=canonical&gt; tag to produce canonical urls.
 Caches the generated urls.
 	
 	
