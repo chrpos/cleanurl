@@ -75,6 +75,7 @@ $options = array(
     "FileExt" => getOption("FileExt", ".php"),
     "UseCache" => getOption("UseCache", true),
     "CreateCanonical" => getOption("CreateCanonical", true),
+    "HideDeveloper" => getOption("HideDeveloper", false),
     "debug" => getOption("Debug", false),
 );
 $file404 =  getOption("404File", "404.php");

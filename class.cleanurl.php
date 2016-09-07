@@ -126,6 +126,7 @@ class CleanUrl
 			"ReplaceToBase" => array("index.php"),
 			"UseCache" => true,
 			"CreateCanonical" => true,
+			"HideDeveloper" => false,
 			"debug" => false,
 		);
 		$this->mOptions = array_merge($this->mOptions, $options);
@@ -403,6 +404,7 @@ class CleanUrl
 			$this->InsertBaseHref($doc);
 			$this->InsertCanonical($doc, $this->GetCleanUrl($phpFileName .  "?" . http_build_query($_GET)));
 			$this->ReplaceAlternate($doc, $phpFileName, $this->GetCleanUrl($phpFileName .  "?" . http_build_query($_GET)));
+			$this->InsertDeveloperNote($doc);
 
 			/* remove POST vars, when rendering linked pages */
 			$_POST = array();
@@ -645,6 +647,25 @@ class CleanUrl
 		return FALSE;
 	}
 
+
+
+	private function InsertDeveloperNote($doc)
+	{
+		assert($doc, "param error");
+
+		if (!$this->mOptions["HideDeveloper"]) {
+
+			$note = "\nPowered by PHP cleanurl module (http://www.csoft-it.at, https://github.com/cpoms/cleanurl).\n";
+			$commentNode = $doc->createComment($note);
+			$headNode = $doc->getElementsByTagName('head')->item(0);
+
+			if ($headNode) {
+
+				$headNode->insertBefore($commentNode, $headNode->firstChild);
+
+			}
+		}
+	}
 
 
 
