@@ -89,6 +89,9 @@
  *
  * @endcode
  *
+ *
+ * @todo Save cache only if modified
+ * @todo Make TTL for cache entries
  */
 class CleanUrl
 {
@@ -122,6 +125,7 @@ class CleanUrl
 			"FileExt" => ".php",
 			"ReplaceToBase" => array("index.php"),
 			"UseCache" => true,
+			"CreateCanonical" => true,
 			"debug" => false,
 		);
 		$this->mOptions = array_merge($this->mOptions, $options);
@@ -397,8 +401,8 @@ class CleanUrl
 				libxml_use_internal_errors($internalErrors);
 			}
 			$this->InsertBaseHref($doc);
-			$this->ReplaceCanonical($doc, $this->GetCleanUrl($phpFileName));
-			$this->ReplaceAlternate($doc, $phpFileName, $this->GetCleanUrl($phpFileName));
+			$this->InsertCanonical($doc, $this->GetCleanUrl($phpFileName .  "?" . http_build_query($_GET)));
+			$this->ReplaceAlternate($doc, $phpFileName, $this->GetCleanUrl($phpFileName .  "?" . http_build_query($_GET)));
 
 			/* remove POST vars, when rendering linked pages */
 			$_POST = array();
@@ -568,14 +572,23 @@ class CleanUrl
 	private function InsertBaseHref($doc)
 	{
 		assert($doc, "doc error");
-		$baseHref = $doc->createElement("base");
-		$baseHref->setAttribute("href", $this->mBaseHref);
+		$baseNodes = $doc->getElementsByTagName('base');
+
+		// search for replace
+		foreach ($baseNodes as $node) {
+
+			$node->setAttribute("href", $this->mBaseHref);
+			return TRUE;
+		}
+
+		$baseNode = $doc->createElement("base");
+		$baseNode->setAttribute("href", $this->mBaseHref);
 		$node = $doc->getElementsByTagName('head')->item(0);
 		//$node->appendChild($baseHref);
 
 		if ($node) {
 
-			$node->insertBefore($baseHref, $node->firstChild);
+			$node->insertBefore($baseNode, $node->firstChild);
 
 		} else {
 
@@ -585,15 +598,17 @@ class CleanUrl
 		
 		return TRUE;
 	}
-	
 
 
-	private function ReplaceCanonical($doc, $cleanUrl)
+
+
+	private function InsertCanonical($doc, $cleanUrl)
 	{
 
 		assert($doc, "param error");
 		$linkNodes = $doc->getElementsByTagName('link');
 
+		// search for replace
 		foreach ($linkNodes as $node) {
 		
 			/* is <link rel="canonical" >? */
@@ -604,6 +619,27 @@ class CleanUrl
 				$node->setAttribute('href', $this->mBaseHrefCanonical . $cleanUrl);
 				return TRUE;
 			}
+		}
+
+		// does not exist, yet
+		if ($this->mOptions["CreateCanonical"]) {
+
+			$linkNode = $doc->createElement("link");
+			$linkNode->setAttribute("rel", "canonical");
+			$linkNode->setAttribute("href", $this->mBaseHrefCanonical . $cleanUrl);
+			$headNode = $doc->getElementsByTagName('head')->item(0);
+
+			if ($headNode) {
+
+				$headNode->insertBefore($linkNode, $headNode->firstChild);
+				return TRUE;
+
+			} else {
+
+				$this->DBG(__FUNCTION__, "head node not found");
+
+			}
+
 		}
 		
 		return FALSE;

@@ -74,6 +74,7 @@ $options = array(
     "IndexFile" => getOption("IndexFile", "index.php"),
     "FileExt" => getOption("FileExt", ".php"),
     "UseCache" => getOption("UseCache", true),
+    "CreateCanonical" => getOption("CreateCanonical", true),
     "debug" => getOption("Debug", false),
 );
 $file404 =  getOption("404File", "404.php");
